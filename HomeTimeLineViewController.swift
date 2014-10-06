@@ -27,14 +27,13 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
             
             self.tweets = Tweet.parseJSONDataIntoTweets(jsonData)
             self.tweets = self.tweets?.sorted({ (s1:Tweet, s2:Tweet) -> Bool in
+//              println(s1.text)
                 return s1.text < s2.text
             })
-            
-            self.tweets = self.tweets?.sorted({ (s1:Tweet, s2:Tweet) -> Bool in
-                println(s1.idString)
-                return s1.idString < s2.idString
+            for var i = 0; i < self.tweets!.count; i++ {
                 
-            })
+                println(self.tweets![i].text)
+            }
         }
     }
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

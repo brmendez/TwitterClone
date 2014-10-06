@@ -12,13 +12,9 @@ import Foundation
 class Tweet {
     //With CLASSES, it needs default value, marked as optional, or has to have initializer
     var text : String
-    var idString : String
     
     init (tweetInfo : NSDictionary) {
         self.text = tweetInfo["text"] as String
-        self.idString = tweetInfo["id_str"] as String
-        
-        
     }
     
     class func parseJSONDataIntoTweets(rawJSONData : NSData) -> [Tweet]? {
