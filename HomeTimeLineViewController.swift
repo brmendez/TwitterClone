@@ -30,7 +30,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
                 return s1.text < s2.text
             })
             for text in self.tweets! {
-                //test test
+                //test test 1
                 println(text.text)
             }
         }
