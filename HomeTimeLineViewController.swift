@@ -31,9 +31,10 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
             })
             
             self.tweets = self.tweets?.sorted({ (s1:Tweet, s2:Tweet) -> Bool in
+                println(s1.idString)
                 return s1.idString < s2.idString
+                
             })
-
         }
     }
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
