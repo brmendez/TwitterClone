@@ -7,34 +7,40 @@
 //
 
 import UIKit
+//added import accounts oct7th
+import Accounts
+//for SLRequest
+import Social
 
 class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView : UITableView!
     
     var tweets : [Tweet]?
-    
-    @IBOutlet weak var tableView : UITableView!
+    var twitterAccount : ACAccount?
+    var networkController : NetworkController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //JSON
         
-        if let path = NSBundle.mainBundle().pathForResource("tweet", ofType: "json") {
-            var err : NSError?
-            //where file lives
-            let jsonData = NSData(contentsOfFile: path)
-            
-            self.tweets = Tweet.parseJSONDataIntoTweets(jsonData)
-            self.tweets = self.tweets?.sorted({ (s1:Tweet, s2:Tweet) -> Bool in
-                return s1.text < s2.text
-            })
-            for text in self.tweets! {
-                //test test 1
-                println(text.text)
+        self.title = "Timeline"
+        
+        //registering NIB
+        self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.networkController
+        
+        self.networkController.fetchHomeTimeLine { (errorDescription, tweets) -> (Void) in
+            if errorDescription != nil {
+                
+            } else {
+                self.tweets = tweets
+                self.tableView.reloadData()
             }
         }
-    }
+        }
+    
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if self.tweets != nil {
             return self.tweets!.count
@@ -44,17 +50,26 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         }
     
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            
-            //1. dequeue cell
-            let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as UITableViewCell
-            //2. figure out which model object youre going to use to configure the cell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
             let tweet = self.tweets?[indexPath.row]
-            cell.textLabel?.text = tweet?.text
-            //3. return cell
+            cell.userTweetsLabel?.text = tweet?.text
+            if tweet?.tweetPicture == nil { //if we dont have the picture already
+                networkController.downloadUserImageForTweet(tweet!, completionHandler: { (image) -> (Void) in
+                    cell.twitterProfilePic.image = image
+            })
+            } else {
+                 cell.twitterProfilePic.image = tweet?.tweetPicture
+            }
+            cell.retweetsLabel.text = "\(tweet!.retweet)"
+            cell.favoritesLabel.text = "\(tweet!.favorited)"
             return cell
         }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
-    }
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            let newVC = self.storyboard?.instantiateViewControllerWithIdentifier("DETAIL_VC") as DetailTweetViewController
+//            let tweet = self.tweets?[indexPath.row]
+            newVC.detailTweet = self.tweets?[indexPath.row]
+            self.navigationController?.pushViewController(newVC, animated: true)
+            
+        }
+}
