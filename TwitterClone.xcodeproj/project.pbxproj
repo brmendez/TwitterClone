@@ -95,8 +95,8 @@
 				1968E5A719E3099300DA5408 /* Main.storyboard */,
 				1968E5AA19E3099300DA5408 /* Images.xcassets */,
 				1968E5A219E3099300DA5408 /* TwitterClone.xcdatamodeld */,
-				1968E5C219E309C000DA5408 /* Controller Layer */,
 				1968E5C119E309B800DA5408 /* Model Layer */,
+				1968E5C219E309C000DA5408 /* Controller Layer */,
 				1968E5C019E309A400DA5408 /* View Layer */,
 				1968E59E19E3099300DA5408 /* Supporting Files */,
 			);

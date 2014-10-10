@@ -17,7 +17,7 @@ class Tweet {
     var favorited : Int
     var id : String
     var avatarURL : String
-//    var screenname : String
+    var screenname : String
 
     init (tweetInfo : NSDictionary) {
         self.text = tweetInfo["text"] as String
@@ -27,8 +27,7 @@ class Tweet {
         self.favorited = tweetInfo["favorite_count"] as Int
         let userInfo = tweetInfo["user"] as NSDictionary
         self.avatarURL = userInfo["profile_image_url"] as String
-//        let screennameString = tweetInfo["screen_name"] as String
-//        self.screenname = "@\(screennameString)"
+        self.screenname = userDict["screen_name"] as String
     }
     
     class func parseJSONDataIntoTweets(rawJSONData : NSData) -> [Tweet]? {

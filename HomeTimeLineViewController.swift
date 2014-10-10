@@ -19,28 +19,54 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var tableView : UITableView!
     
     var tweets : [Tweet]?
-    var twitterAccount : ACAccount?
     var networkController : NetworkController!
+    var screenname : String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.networkController
+        
+//            networkController.fetchHomeTimeLine({ (errorDescription, tweets) -> (Void) in
+//                if errorDescription != nil {
+//                    
+//                } else {
+//                    self.tweets = tweets
+//                    self.tableView.reloadData()
+//                }
+//            })
+        
+        
+        
+        if screenname != nil {
+            networkController.fetchUserTweets(screenname!, completionHandler: { (errorDescription, tweets) -> (Void) in
+                if errorDescription != nil {
+                    
+                } else {
+                    self.tweets = tweets
+                    self.tableView.reloadData()
+                }
+            })
+        } else {
+            networkController.fetchHomeTimeLine({ (errorDescription, tweets) -> (Void) in
+                if errorDescription != nil {
+                    
+                } else {
+                    self.tweets = tweets
+                    self.tableView.reloadData()
+                }
+            })
+        }
+        
         
         self.title = "Timeline"
         
         //registering NIB
         self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.networkController
-        
-        self.networkController.fetchHomeTimeLine { (errorDescription, tweets) -> (Void) in
-            if errorDescription != nil {
-                
-            } else {
-                self.tweets = tweets
-                self.tableView.reloadData()
-            }
-        }
+    
         }
     
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,7 +95,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let newVC = self.storyboard?.instantiateViewControllerWithIdentifier("DETAIL_VC") as DetailTweetViewController
-//            let tweet = self.tweets?[indexPath.row]
             newVC.detailTweet = self.tweets?[indexPath.row]
             self.navigationController?.pushViewController(newVC, animated: true)
             

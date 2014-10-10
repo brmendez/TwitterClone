@@ -11,7 +11,6 @@ import UIKit
 class DetailTweetViewController: UIViewController {
     
     var detailTweet : Tweet?
-
     
     @IBOutlet weak var detailTwitterPic: UIImageView!
     @IBOutlet weak var detailTweetMessage: UILabel!
@@ -19,7 +18,6 @@ class DetailTweetViewController: UIViewController {
     @IBOutlet weak var detailFavorites: UILabel!
     
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,30 +32,11 @@ class DetailTweetViewController: UIViewController {
 
     }
     
-//    @IBOutlet weak var userTimeLineButtonPressed: UIButton! {
-//
-//        let newVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_DETAIL_VC") as UserTimelineViewController
-//            
-//            self.navigationController?.pushViewController(newVC, animated: true)
-//            
-//            newVC.screen
-//            
-//            
-//            
-//            
-//            
-//            
-//            
-//            
-//                let newVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_VC") as UserTimelineViewController
-//                self.navigationController?.pushViewController(newVC, animated: true)
-//                newVC.screenname = selectedTweet?.screenname
-//                newVC.user = selectedTweet?.user
-//                newVC.photo = selectedTweet?.photo
-//
-//            
-//            
-//    }
-    
-
+    @IBAction func pictureButtonPressed(sender: UIButton) {
+        let newVC = self.storyboard?.instantiateViewControllerWithIdentifier("HOME_VC") as HomeTimeLineViewController
+        newVC.screenname = detailTweet?.screenname
+        
+        self.navigationController?.pushViewController(newVC, animated: true)
+        
+    }
 }
