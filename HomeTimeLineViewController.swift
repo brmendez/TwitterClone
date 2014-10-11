@@ -17,6 +17,8 @@ import Social
 class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var screenNameHeaderLabel: UILabel!
+    @IBOutlet weak var userHeaderImage: UIImageView!
     
     var tweets : [Tweet]?
     var networkController : NetworkController!
@@ -25,6 +27,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+                self.title = screenname?
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.networkController = appDelegate.networkController
@@ -39,6 +43,11 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
 //            })
         
         
+        if self.screenNameHeaderLabel != nil {
+            
+        } else {
+            self.screenNameHeaderLabel.text = screenname
+        }
         
         if screenname != nil {
             networkController.fetchUserTweets(screenname!, completionHandler: { (errorDescription, tweets) -> (Void) in
@@ -59,9 +68,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
                 }
             })
         }
-        
-        
-        self.title = "Timeline"
         
         //registering NIB
         self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")

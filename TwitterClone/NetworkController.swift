@@ -32,6 +32,8 @@ class NetworkController {
         
         accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted : Bool, error : NSError!) -> Void in if granted {
             
+            
+            
                 let accounts = accountStore.accountsWithAccountType(accountType)
                 self.twitterAccount = accounts.first as ACAccount?
                 //setup our twitter account
@@ -41,10 +43,8 @@ class NetworkController {
                 twitterRequest.account = self.twitterAccount
             
                     twitterRequest.performRequestWithHandler({ (data, httpResponse, error) -> Void in
-                        println(httpResponse.statusCode)
                         switch httpResponse.statusCode {
                         case 200...299:
-                            println("test123123123")
                             let tweets = Tweet.parseJSONDataIntoTweets(data)
                             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                                 completionHandler(errorDescription: nil, tweets: tweets)

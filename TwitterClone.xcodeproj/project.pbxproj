@@ -19,7 +19,6 @@
 		19928C9419E734CF0097551D /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19928C9219E734CF0097551D /* TweetCell.swift */; };
 		19928C9519E734CF0097551D /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19928C9319E734CF0097551D /* TweetCell.xib */; };
 		19928C9719E744FC0097551D /* DetailTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19928C9619E744FC0097551D /* DetailTweetViewController.swift */; };
-		19928C9919E766530097551D /* UserTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19928C9819E766530097551D /* UserTimelineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 		19928C9219E734CF0097551D /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = ../TweetCell.swift; sourceTree = "<group>"; };
 		19928C9319E734CF0097551D /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetCell.xib; path = ../TweetCell.xib; sourceTree = "<group>"; };
 		19928C9619E744FC0097551D /* DetailTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTweetViewController.swift; sourceTree = "<group>"; };
-		19928C9819E766530097551D /* UserTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +150,6 @@
 				1968E5C319E309F400DA5408 /* HomeTimeLineViewController.swift */,
 				198C25BC19E5B4C200510988 /* NetworkController.swift */,
 				19928C9619E744FC0097551D /* DetailTweetViewController.swift */,
-				19928C9819E766530097551D /* UserTimelineViewController.swift */,
 			);
 			name = "Controller Layer";
 			sourceTree = "<group>";
@@ -258,7 +255,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19928C9919E766530097551D /* UserTimelineViewController.swift in Sources */,
 				1968E5A119E3099300DA5408 /* AppDelegate.swift in Sources */,
 				198C25BD19E5B4C200510988 /* NetworkController.swift in Sources */,
 				1968E5A419E3099300DA5408 /* TwitterClone.xcdatamodeld in Sources */,
