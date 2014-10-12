@@ -23,6 +23,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     var tweets : [Tweet]?
     var networkController : NetworkController!
     var screenname : String?
+    var userPic : UIImage?
     
     
     override func viewDidLoad() {
@@ -43,10 +44,11 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
 //            })
         
         
-        if self.screenNameHeaderLabel != nil {
-            
+        if self.screenname == nil {
+            screenNameHeaderLabel.text = "Twitter"
         } else {
             self.screenNameHeaderLabel.text = screenname
+            self.userHeaderImage.image = userPic
         }
         
         if screenname != nil {
@@ -70,7 +72,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         }
         
         //registering NIB
-        self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
+        self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle())!, forCellReuseIdentifier: "TWEET_CELL")
         
     
         }

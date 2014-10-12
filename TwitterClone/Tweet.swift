@@ -23,10 +23,10 @@ class Tweet {
         self.text = tweetInfo["text"] as String
         self.retweet = tweetInfo["retweet_count"] as Int
         self.id = tweetInfo["id_str"] as String
-        var userDict = tweetInfo["user"] as NSDictionary
         self.favorited = tweetInfo["favorite_count"] as Int
         let userInfo = tweetInfo["user"] as NSDictionary
         self.avatarURL = userInfo["profile_image_url"] as String
+        var userDict = tweetInfo["user"] as NSDictionary
         self.screenname = userDict["screen_name"] as String
     }
     

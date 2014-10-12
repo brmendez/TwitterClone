@@ -16,7 +16,7 @@ class DetailTweetViewController: UIViewController {
     @IBOutlet weak var detailTweetMessage: UILabel!
     @IBOutlet weak var detailRetweets: UILabel!
     @IBOutlet weak var detailFavorites: UILabel!
-    
+    @IBOutlet weak var screennameHeaderLabelDVC: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,7 @@ class DetailTweetViewController: UIViewController {
         self.detailTweetMessage.text = detailTweet?.text
         self.detailRetweets.text = String(detailTweet!.retweet)
         self.detailFavorites.text = String(detailTweet!.favorited)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +36,7 @@ class DetailTweetViewController: UIViewController {
     @IBAction func pictureButtonPressed(sender: UIButton) {
         let newVC = self.storyboard?.instantiateViewControllerWithIdentifier("HOME_VC") as HomeTimeLineViewController
         newVC.screenname = detailTweet?.screenname
+        newVC.userPic = detailTweet?.tweetPicture
         
         self.navigationController?.pushViewController(newVC, animated: true)
         

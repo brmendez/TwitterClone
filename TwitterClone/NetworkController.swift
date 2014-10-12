@@ -110,9 +110,9 @@ class NetworkController {
     
     func downloadUserImageForTweet(tweet : Tweet, completionHandler: (Image: UIImage) -> (Void)) {
         let url = NSURL(string: tweet.avatarURL)
-        let imageData = NSData(contentsOfURL: url) //network call
-        let avatarImage = UIImage(data: imageData)
+        let imageData = NSData(contentsOfURL: url!) //network call
+        let avatarImage = UIImage(data: imageData!)
         tweet.tweetPicture = avatarImage
-        completionHandler(Image: avatarImage)
+        completionHandler(Image: avatarImage!)
     }
 }
